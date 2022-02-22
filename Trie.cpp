@@ -34,16 +34,20 @@ A3: A Trie and Rule-of-Three
         void Trie::addAWord(std::string word)
         {
 
-            Node* current = root;
+             Node* current = &root;
+
             for(int i = 0; i < word.length(); i++)
             {
-                
-            if(!current->getNode(word[i]-'a'))
-            {
-                current->setNode(word[i]-'a');
+                    
+                if(!current->isValidNode(word[i]))
+                {
+                    current->setNode(word[i]);
+                }
+                 auto iterator = current->getNodeIterator(word[i]);
+                current = &iterator->second;
+             
             }
-            current = current->getNode(word[i]-'a');
-            }
+            
             current->setIsWord(true);
 
         }

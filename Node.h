@@ -11,8 +11,8 @@ class Node
 {
    private:
         bool isWord;
-        std::map<char, Node> branches; 
-       
+        std::map<char, Node> branches;
+
     public:  
     Node();
 //     Node( const Node&  other);

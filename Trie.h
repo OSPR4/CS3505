@@ -32,7 +32,7 @@ class Trie
 
         void traverseTrie(Node* current, std::string word,  std::vector<std::string> &wordList);
 
-        Node* searchTrie(std::string word);
+        Node searchTrie(std::string word);
 
 };
 #endif

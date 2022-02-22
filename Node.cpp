@@ -47,38 +47,38 @@ Node::Node()
     }
 
 
-    //Destructor
-    Node::~Node()
-    {
-        for(int i = 0; i < 26; i++)
-        {   
-            if(children[i] != NULL)
-            delete children[i];
-        }
-    }
+    // //Destructor
+    // Node::~Node()
+    // {
+    //     for(int i = 0; i < 26; i++)
+    //     {   
+    //         if(children[i] != NULL)
+    //         delete children[i];
+    //     }
+    // }
 
-    //Copy constructor
-    Node::Node( const Node&  other) 
-    {
-        isWord = other.isWord;
-        for(int i = 0; i < 26; i++)
-        {
-            children[i] = nullptr;
-            if(other.children[i])
-                children[i] = other.children[i];
-        }
-        // *children = *other.children;
-        //children = new Node((other.children));
-    }
+    // //Copy constructor
+    // Node::Node( const Node&  other) 
+    // {
+    //     isWord = other.isWord;
+    //     for(int i = 0; i < 26; i++)
+    //     {
+    //         children[i] = nullptr;
+    //         if(other.children[i])
+    //             children[i] = other.children[i];
+    //     }
+    //     // *children = *other.children;
+    //     //children = new Node((other.children));
+    // }
 
-    //Copy assignment operator 
-    Node& Node::operator=(Node other)
-    {
-        std::swap(isWord, other.isWord);
-        for(int i = 0; i < 26; i++)
-        {
-             std::swap(children[i], other.children[i]);
-        }
+    // //Copy assignment operator 
+    // Node& Node::operator=(Node other)
+    // {
+    //     std::swap(isWord, other.isWord);
+    //     for(int i = 0; i < 26; i++)
+    //     {
+    //          std::swap(children[i], other.children[i]);
+    //     }
        
-        return *this;
-    }
+    //     return *this;
+    // }
