@@ -20,7 +20,7 @@ class Node
 //     Node& operator=(Node other);
     void setNode(char index); 
     Node getNode(char index);
-    std::map<char, Node>::iterator getNodeIt(char index);
+    std::map<char, Node>::iterator getNodeIterator(char index);
    
     bool isValidNode(char index);
     void setIsWord(bool val);
