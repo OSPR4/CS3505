@@ -1,8 +1,7 @@
-
 /*
 Osee Pierre
 CS3505
-A3: A Trie and Rule-of-Three
+A4: Refactoring and Testing
 */
 #include "Node.h"
 #include <vector>
@@ -24,9 +23,7 @@ class Trie
     public:
         Trie();
 
-        // Trie( const Trie& other);
 
-        // Trie& operator=(Trie other);
 
         void addAWord(std::string word);
 

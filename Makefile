@@ -1,6 +1,5 @@
 CC = g++
 CFLAGS = -std=c++11 -Wall -fsanitize=address -fsanitize=undefined -g
-INPUT =  "dictionary.txt" "query.txt"
 GOOGLETEST = ./googletest
 OUTPUTNAME = TrieTests
 

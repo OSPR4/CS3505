@@ -1,8 +1,9 @@
 /*
 Osee Pierre
 CS3505
-A3: A Trie and Rule-of-Three
+A4: Refactoring and Testing
 */
+
 #include "Node.h"
 #include "Trie.h"
 #include <vector>
@@ -16,39 +17,23 @@ A3: A Trie and Rule-of-Three
          root = Node();
         }
 
-        // //Copy constructor
-        // Trie::Trie( const Trie& other) 
-        // {
-           
-        //     root = new Node(*(other.root));
-        // }
-
-        // //Copy assignment operator 
-        // Trie& Trie::operator=(Trie other)
-        // {
-        //     std::swap(root, other.root);
-        //     return *this;
-        // }
-
         //Add word to Trie
         void Trie::addAWord(std::string word)
         {
 
-             Node* current = &root;
+             Node* currentBranch = &root;
 
-            for(int i = 0; i < word.length(); i++)
-            {
-                    
-                if(!current->isValidNode(word[i]))
+             for (size_t i = 0; i < word.length(); i++)
+             {
+                if(!currentBranch->isValidNode(word[i]))
                 {
-                    current->setNode(word[i]);
+                    currentBranch->setNode(word[i]);
                 }
-                 auto iterator = current->getNodeIterator(word[i]);
-                current = &iterator->second;
-             
-            }
+                 auto iterator = currentBranch->getNodeIterator(word[i]);
+                currentBranch = &iterator->second;
+             }
             
-            current->setIsWord(true);
+            currentBranch->setIsWord(true);
 
         }
 
@@ -69,74 +54,73 @@ A3: A Trie and Rule-of-Three
         //Helper function that searches for a word
         Node Trie::searchTrie(std::string word)
         {
-            Node current = root;
+            Node currentBranch = root;
             
 
-            for(int i = 0; i < word.length(); i++)
+            for(size_t i = 0; i < word.length(); i++)
             {
-                if(!current.isValidNode(word[i]))
+                if(!currentBranch.isValidNode(word[i]))
                 {
-                    Node empty; 
-                    return empty;
+                    Node emptyBranch; 
+                    return emptyBranch;
                 }
                 else
                 {
-                 current = current.getNode(word[i]);
+                 currentBranch = currentBranch.getNode(word[i]);
                 }
                 
             }
-            return current;
+            return currentBranch;
 
         }
 
-        //Returns a list of word that start with a particular set of letter
-        std::vector<std::string> Trie::allWordsStartingWithPrefix(std::string word)
+        //Returns a list of words that start with a particular set of letters
+        std::vector<std::string> Trie::allWordsStartingWithPrefix(std::string prefixLetters)
         {
-            std::vector<std::string> words;
+            std::vector<std::string> wordList;
 
-            Node prefixNode = searchTrie(word);
+            Node prefixNode = searchTrie(prefixLetters);
 
              if((prefixNode.getBranchSize() < 1))
-                return words;
+                return wordList;
 
-               
+            
+            //Checks if the prefix characters is a word
              if (prefixNode.getIsWord())
              {
-                words.push_back(word);
+                wordList.push_back(prefixLetters);
              }
-             traverseTrie(prefixNode, word, words);
+             //TraversTrie to collect words starting with the given prefix
+             traverseTrie(prefixNode, prefixLetters, wordList);
 
-            return words;
+            return wordList;
              
         }
 
         //Helper function to assist is in retrieving all words starting with a particular set of letter
-        void Trie::traverseTrie(Node current, std::string word,  std::vector<std::string> &wordList)
+        void Trie::traverseTrie(Node currentBranch, std::string word,  std::vector<std::string> &wordList)
         {
-            Node next = current;
+            Node nextBranch = currentBranch;
             std::string tempWord = word;
-
-            //  std::cout << "made it here: " << current->getBranchSize() << std::endl;
-           // std::cout << "made it here: " << word << std::endl;
             
+            //Checks if different letters represent a valid node, if so, traverse down
+            //each valid node and collect complete words
              for (size_t i = 0; i < 26; i++)
              {
-                 char c = i + 97;
-                 if(!current.isValidNode(c))
+                 char letter = i + 97;
+                 if(!currentBranch.isValidNode(letter))
                     continue;
                 
-                tempWord += c;
+                tempWord += letter;
 
-                // auto iterator = current->getNodeIterator(c);
-                // current = &iterator->second;
-
-                if(current.getNode(c).getIsWord())
+                if(currentBranch.getNode(letter).getIsWord())
                     wordList.push_back(tempWord);
                 
-                auto iterator = current.getNodeIterator(c);
-                next = iterator->second;
-               // std::cout << "made it here: " << next.getIsWord() << std::endl;
-                traverseTrie(next, tempWord, wordList);
+                // auto iterator = currentBranch.getNodeIterator(letter);
+                // nextBranch = iterator->second;
+                nextBranch = currentBranch.getNode(letter);
+
+                traverseTrie(nextBranch, tempWord, wordList);
                 tempWord = word;
 
              }

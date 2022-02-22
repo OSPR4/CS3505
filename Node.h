@@ -1,7 +1,7 @@
 /*
 Osee Pierre
 CS3505
-A3: A Trie and Rule-of-Three
+A4: Refactoring and Testing
 */
 #ifndef NODE_H
 #define NODE_H
@@ -15,9 +15,7 @@ class Node
 
     public:  
     Node();
-//     Node( const Node&  other);
-//    ~Node();
-//     Node& operator=(Node other);
+
     void setNode(char index); 
     Node getNode(char index);
     

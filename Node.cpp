@@ -1,7 +1,7 @@
 /*
 Osee Pierre
 CS3505
-A3: A Trie and Rule-of-Three
+A4: Refactoring and Testing
 */
 #include "Node.h"
 #include <algorithm>
@@ -11,29 +11,27 @@ Node::Node()
 {
    
     isWord = false;
-    // for(int i = 0; i < 26; i++)
-    // {
-    //     children[i] = nullptr;
-    // }
 }
     //Node Setter 
     void Node::setNode(char index)
         {
-            Node n;
-            branches[index] = n;
+            Node newNode;
+            branches[index] = newNode;
         }
 
-    //Node Getter
+    //Node Getter with iterator
     std::map<char, Node>::iterator Node::getNodeIterator(char index)
     {
         return branches.find(index);
     }
 
+    //Node Getter 
     Node Node::getNode(char index)
     {
         return branches[index];
     }
 
+    //Determine if a letter is within the branches map
     bool Node::isValidNode(char index)
     {
          
@@ -44,55 +42,19 @@ Node::Node()
             return false;
         }
     }
+
     int Node::getBranchSize()
     {
         return branches.size();
     }
-    //Setting for word validity
+    //Setter for word validity
     void Node::setIsWord(bool val)
     {
         isWord = true;
     }
 
-     //Getting for word validity
+     //Getter for word validity
     bool Node::getIsWord()
     {
         return isWord;
     }
-
-
-    // //Destructor
-    // Node::~Node()
-    // {
-    //     for(int i = 0; i < 26; i++)
-    //     {   
-    //         if(children[i] != NULL)
-    //         delete children[i];
-    //     }
-    // }
-
-    // //Copy constructor
-    // Node::Node( const Node&  other) 
-    // {
-    //     isWord = other.isWord;
-    //     for(int i = 0; i < 26; i++)
-    //     {
-    //         children[i] = nullptr;
-    //         if(other.children[i])
-    //             children[i] = other.children[i];
-    //     }
-    //     // *children = *other.children;
-    //     //children = new Node((other.children));
-    // }
-
-    // //Copy assignment operator 
-    // Node& Node::operator=(Node other)
-    // {
-    //     std::swap(isWord, other.isWord);
-    //     for(int i = 0; i < 26; i++)
-    //     {
-    //          std::swap(children[i], other.children[i]);
-    //     }
-       
-    //     return *this;
-    // }
