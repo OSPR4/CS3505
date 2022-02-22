@@ -5,6 +5,7 @@ A3: A Trie and Rule-of-Three
 */
 #ifndef NODE_H
 #define NODE_H
+#include <map>
 
 class Node
 {
@@ -17,10 +18,14 @@ class Node
 //     Node( const Node&  other);
 //    ~Node();
 //     Node& operator=(Node other);
-    void setNode(int index);
-    Node* getNode(int index);
+    void setNode(char index); 
+    Node getNode(char index);
+    std::map<char, Node>::iterator getNodeIt(char index);
+   
+    bool isValidNode(char index);
     void setIsWord(bool val);
     bool getIsWord();
+
 
 };
 #endif
