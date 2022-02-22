@@ -30,7 +30,7 @@ class Trie
        
         std::vector<std::string> allWordsStartingWithPrefix(std::string word);
 
-        void traverseTrie(Node* current, std::string word,  std::vector<std::string> &wordList);
+        void traverseTrie(Node current, std::string word,  std::vector<std::string> &wordList);
 
         Node searchTrie(std::string word);
 

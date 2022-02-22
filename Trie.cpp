@@ -70,13 +70,13 @@ A3: A Trie and Rule-of-Three
         Node Trie::searchTrie(std::string word)
         {
             Node current = root;
-            // std::cout << current.branches.size() << std::endl;
+            
 
             for(int i = 0; i < word.length(); i++)
             {
                 if(!current.isValidNode(word[i]))
                 {
-                    Node empty;
+                    Node empty; 
                     return empty;
                 }
                 else
@@ -88,46 +88,54 @@ A3: A Trie and Rule-of-Three
             return current;
 
         }
+
         //Returns a list of word that start with a particular set of letter
         std::vector<std::string> Trie::allWordsStartingWithPrefix(std::string word)
         {
             std::vector<std::string> words;
 
-            Node* prefixNode = searchTrie(word);
+            Node prefixNode = searchTrie(word);
 
-             if(prefixNode == NULL)
+             if((prefixNode.getBranchSize() < 1))
                 return words;
-             if (prefixNode->getIsWord())
+
+               
+             if (prefixNode.getIsWord())
              {
                 words.push_back(word);
              }
-
-
              traverseTrie(prefixNode, word, words);
-
 
             return words;
              
         }
 
         //Helper function to assist is in retrieving all words starting with a particular set of letter
-        void Trie::traverseTrie(Node* current, std::string word,  std::vector<std::string> &wordList)
+        void Trie::traverseTrie(Node current, std::string word,  std::vector<std::string> &wordList)
         {
-            Node* next = current;
+            Node next = current;
             std::string tempWord = word;
 
-            
+            //  std::cout << "made it here: " << current->getBranchSize() << std::endl;
+           // std::cout << "made it here: " << word << std::endl;
             
              for (size_t i = 0; i < 26; i++)
              {
-                 if(!current->getNode(i))
+                 char c = i + 97;
+                 if(!current.isValidNode(c))
                     continue;
-                char c = i + 97;
+                
                 tempWord += c;
 
-                if(current->getNode(i)->getIsWord())
+                // auto iterator = current->getNodeIterator(c);
+                // current = &iterator->second;
+
+                if(current.getNode(c).getIsWord())
                     wordList.push_back(tempWord);
-                next = current->getNode(i);
+                
+                auto iterator = current.getNodeIterator(c);
+                next = iterator->second;
+               // std::cout << "made it here: " << next.getIsWord() << std::endl;
                 traverseTrie(next, tempWord, wordList);
                 tempWord = word;
 
