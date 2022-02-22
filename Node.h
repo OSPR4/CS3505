@@ -20,9 +20,11 @@ class Node
 //     Node& operator=(Node other);
     void setNode(char index); 
     Node getNode(char index);
+    
     std::map<char, Node>::iterator getNodeIterator(char index);
    
     bool isValidNode(char index);
+    int getBranchSize(); 
     void setIsWord(bool val);
     bool getIsWord();
 
