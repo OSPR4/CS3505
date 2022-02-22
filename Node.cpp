@@ -34,6 +34,19 @@ Node::Node()
         return branches[index];
     }
 
+    bool Node::isValidNode(char index)
+    {
+         
+        auto search = branches.find(index);
+        if (search != branches.end()) {
+            // std::cout << search->first << std::endl;
+            // std::cout << "return true" << std::endl;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //Setting for word validity
     void Node::setIsWord(bool val)
     {
