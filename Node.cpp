@@ -17,15 +17,21 @@ Node::Node()
     // }
 }
     //Node Setter 
-    void Node::setNode(int index)
+    void Node::setNode(char index)
         {
-            children[index] = new Node();
+            Node n;
+            branches[index] = n;
         }
 
     //Node Getter
-    Node* Node::getNode(int index)
+    std::map<char, Node>::iterator Node::getNodeIterator(char index)
     {
-        return children[index];
+        return branches.find(index);
+    }
+
+    Node Node::getNode(char index)
+    {
+        return branches[index];
     }
 
     //Setting for word validity
