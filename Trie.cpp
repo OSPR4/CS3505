@@ -57,15 +57,37 @@ A3: A Trie and Rule-of-Three
         {
             if(word.length() == 0)
                 return false;
-            Node* wordNode = searchTrie(word);
+            Node wordNode = searchTrie(word);
 
-            if(wordNode && wordNode->getIsWord())
+            if(wordNode.getIsWord())
                 return true;
             else
                 return false;
 
         }
 
+        //Helper function that searches for a word
+        Node Trie::searchTrie(std::string word)
+        {
+            Node current = root;
+            // std::cout << current.branches.size() << std::endl;
+
+            for(int i = 0; i < word.length(); i++)
+            {
+                if(!current.isValidNode(word[i]))
+                {
+                    Node empty;
+                    return empty;
+                }
+                else
+                {
+                 current = current.getNode(word[i]);
+                }
+                
+            }
+            return current;
+
+        }
         //Returns a list of word that start with a particular set of letter
         std::vector<std::string> Trie::allWordsStartingWithPrefix(std::string word)
         {
@@ -113,19 +135,3 @@ A3: A Trie and Rule-of-Three
 
         }
 
-        //Helper function that searches for a word
-        Node* Trie::searchTrie(std::string word)
-        {
-            Node* current = root;
-
-            for(int i = 0; i < word.length(); i++)
-            {
-                if(!current->getNode(word[i] - 'a'))
-                    return NULL;
-                else
-                    current = current->getNode(word[i]-'a');
-            }
-
-            return current;
-
-        }
