@@ -6,12 +6,36 @@ A4: Refactoring and Testing
 #include "Trie.h"
 #include "gtest/gtest.h"
 
-TEST(TrieTest, AddWord) {
+TEST(TrieTest, TestAddWord) {
     Trie tr;
     std::string n("dog");
     tr.addAWord(n);
     bool expectedResult = tr.isAWord(n);
     ASSERT_TRUE(expectedResult);
+}
+
+TEST(TrieTest, TestLongWord) {
+    Trie tr;
+    std::string n("donaudampfschiffahrtselektrizitatenhauptbetriebswerkbauunterbeamtengesellschaft");
+    tr.addAWord(n);
+    bool expectedResult = tr.isAWord(n);
+    ASSERT_TRUE(expectedResult);
+}
+
+TEST(TrieTest, TesSingleLetter) {
+    Trie tr;
+    std::string n("z");
+    tr.addAWord(n);
+    bool expectedResult = tr.isAWord(n);
+    ASSERT_TRUE(expectedResult);
+}
+
+TEST(TrieTest, TestAddEmptyWord) {
+    Trie tr;
+    std::string n("");
+    tr.addAWord(n);
+    bool expectedResult = tr.isAWord(n);
+    ASSERT_FALSE(expectedResult);
 }
 
 TEST(TrieTest, PrefixTestForWordsInTrie) {
@@ -90,7 +114,6 @@ TEST(TrieTest, TestTrieAssignment1) {
     Trie myTrie;
     myTrie.addAWord("apple");
     Trie otherTrie = myTrie;
-    otherTrie.isAWord("apple");
 
     otherTrie.addAWord("pear");
 
@@ -102,7 +125,6 @@ TEST(TrieTest, TestTrieAssignment2) {
     Trie myTrie;
     myTrie.addAWord("apple");
     Trie otherTrie = myTrie;
-    otherTrie.isAWord("apple");
 
      Trie myTrie2;
      myTrie2.addAWord("kiwi");
