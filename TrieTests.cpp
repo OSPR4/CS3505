@@ -1,3 +1,8 @@
+/*
+Osee Pierre
+CS3505
+A4: Refactoring and Testing
+*/
 #include "Trie.h"
 #include "gtest/gtest.h"
 
@@ -69,4 +74,44 @@ TEST(TrieTest, TestForDuplicateEntries) {
     }
     
     ASSERT_EQ(2, count);
+}
+
+TEST(TrieTest, TestTrieAssignment) {
+    Trie myTrie;
+    myTrie.addAWord("apple");
+    Trie otherTrie = myTrie;
+    bool expectedResult = otherTrie.isAWord("apple");
+
+    ASSERT_TRUE(expectedResult);
+
+}
+
+TEST(TrieTest, TestTrieAssignment1) {
+    Trie myTrie;
+    myTrie.addAWord("apple");
+    Trie otherTrie = myTrie;
+    otherTrie.isAWord("apple");
+
+    otherTrie.addAWord("pear");
+
+    bool expectedResult = myTrie.isAWord("pear");
+    ASSERT_FALSE(expectedResult);
+}
+
+TEST(TrieTest, TestTrieAssignment2) {
+    Trie myTrie;
+    myTrie.addAWord("apple");
+    Trie otherTrie = myTrie;
+    otherTrie.isAWord("apple");
+
+     Trie myTrie2;
+     myTrie2.addAWord("kiwi");
+
+    otherTrie = myTrie2;
+
+    bool expectedResult = otherTrie.isAWord("apple");
+    ASSERT_FALSE(expectedResult);
+
+    expectedResult = otherTrie.isAWord("kiwi");
+    ASSERT_TRUE(expectedResult);
 }
