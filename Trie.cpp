@@ -29,7 +29,7 @@ A4: Refactoring and Testing
                 {
                     currentBranch->setNode(word[i]);
                 }
-                 auto iterator = currentBranch->getNodeIterator(word[i]);
+                auto iterator = currentBranch->getNodeIterator(word[i]);
                 currentBranch = &iterator->second;
              }
             
@@ -116,8 +116,6 @@ A4: Refactoring and Testing
                 if(currentBranch.getNode(letter).getIsWord())
                     wordList.push_back(tempWord);
                 
-                // auto iterator = currentBranch.getNodeIterator(letter);
-                // nextBranch = iterator->second;
                 nextBranch = currentBranch.getNode(letter);
 
                 traverseTrie(nextBranch, tempWord, wordList);
